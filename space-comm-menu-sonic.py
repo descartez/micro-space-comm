@@ -95,8 +95,14 @@ while True:
         temp = temperature()
         display.scroll(str(temp) + 'C')
     if button_b.is_pressed() and menu_counter == 2:
-        music.pitch(262, 10)
-        music.pitch(330, 10)
+        x = accelerometer.get_x()
+        if x < 0:
+            x = x * -1
+        y = accelerometer.get_y()
+        if y < 0:
+            y = y * -1
+        music.pitch(x, 10)
+        music.pitch(y, 10)
 
     incoming = radio.receive()
     if incoming == 'send':
