@@ -76,9 +76,16 @@ flash = [Image().invert()*(i/9) for i in range(9, -1, -1)]
 menu_items = [radio_menu, temp_menu, sonic_menu]
 menu_counter = 0
 
+receive_tune = ["C5:1"]
+music.set_tempo(ticks=4, bpm=120)
+
 radio.config(channel=7)
 radio.config(power=7)
 radio.on()
+
+for i in range(100, 500, 50):
+    music.pitch(i, 100)
+
 while True:
     if button_a.is_pressed() and button_b.is_pressed():
         display.clear()
@@ -102,11 +109,16 @@ while True:
         if y < 0:
             y = y * -1
         music.pitch(x, 10)
+        music.pitch(200, 15)
         music.pitch(y, 10)
+        music.pitch(500, 15)
 
     incoming = radio.receive()
     if incoming == 'send':
         display.show(flash, delay=100, wait=False)
+        music.play(receive_tune, loop=False, wait=False)
         radio.send('receive')
     if incoming == 'receive':
         display.show(flash, delay=100, wait=False)
+
+
