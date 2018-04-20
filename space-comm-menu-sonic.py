@@ -1,5 +1,6 @@
 from microbit import *
 import radio
+import music
 
 radio_send1 = Image("00000:"
                     "00000:"
@@ -52,10 +53,27 @@ temp_menu3 = Image("00900:"
                     "00900:")
 temp_menu = [temp_menu1, temp_menu2, temp_menu3]
 
+sonic_menu1 = Image("00000:"
+                    "00000:"
+                    "90000:"
+                    "00000:"
+                    "00000:")
+sonic_menu2 = Image("00000:"
+                    "00000:"
+                    "99900:"
+                    "00000:"
+                    "00000:")
+sonic_menu3 = Image("00000:"
+                    "00000:"
+                    "99999:"
+                    "00000:"
+                    "00000:")
+sonic_menu = [sonic_menu1, sonic_menu2, sonic_menu3]
+
 flash = [Image().invert()*(i/9) for i in range(9, -1, -1)]
 
 flash = [Image().invert()*(i/9) for i in range(9, -1, -1)]
-menu_items = [radio_menu, temp_menu]
+menu_items = [radio_menu, temp_menu, sonic_menu]
 menu_counter = 0
 
 radio.config(channel=7)
@@ -76,6 +94,10 @@ while True:
     if button_b.was_pressed() and menu_counter == 1:
         temp = temperature()
         display.scroll(str(temp) + 'C')
+    if button_b.is_pressed() and menu_counter == 2:
+        music.pitch(262, 10)
+        music.pitch(330, 10)
+
     incoming = radio.receive()
     if incoming == 'send':
         display.show(flash, delay=100, wait=False)
