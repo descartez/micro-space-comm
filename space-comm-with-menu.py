@@ -1,10 +1,65 @@
 from microbit import *
 import radio
-menu_items = [Image.HEART_SMALL, Image.HEART, Image.TRIANGLE]
-menu_counter = 0
+
+radio_send1 = Image("00000:"
+                    "00000:"
+                    "90000:"
+                    "00000:"
+                    "00000:")
+radio_send2 = Image("00000:"
+                    "00900:"
+                    "90900:"
+                    "00900:"
+                    "00000:")
+radio_send3 = Image("00009:"
+                    "00909:"
+                    "90909:"
+                    "00909:"
+                    "00009:")
+radio_send = [radio_send1, radio_send2, radio_send3]
+
+radio_menu1 = Image("00000:"
+                    "00000:"
+                    "00000:"
+                    "00000:"
+                    "00900:")
+radio_menu2 = Image("00000:"
+                    "00000:"
+                    "09990:"
+                    "00000:"
+                    "00900:")
+radio_menu3 = Image("99999:"
+                    "00000:"
+                    "09990:"
+                    "00000:"
+                    "00900:")
+radio_menu = [radio_menu1, radio_menu2, radio_menu3]
+
+temp_menu1 = Image("00000:"
+                    "00000:"
+                    "00000:"
+                    "00000:"
+                    "00900:")
+temp_menu2 = Image("00000:"
+                    "00900:"
+                    "00900:"
+                    "09990:"
+                    "00900:")
+temp_menu3 = Image("00900:"
+                    "00900:"
+                    "00900:"
+                    "09990:"
+                    "00900:")
+temp_menu = [temp_menu1, temp_menu2, temp_menu3]
+
 flash = [Image().invert()*(i/9) for i in range(9, -1, -1)]
+
+flash = [Image().invert()*(i/9) for i in range(9, -1, -1)]
+menu_items = [radio_menu, temp_menu]
+menu_counter = 0
+
 radio.config(channel=7)
-radio.config(power=3)
+radio.config(power=7)
 radio.on()
 while True:
     if button_a.is_pressed() and button_b.is_pressed():
@@ -14,16 +69,13 @@ while True:
             menu_counter += 1
         else:
             menu_counter = 0
-        display.show(menu_items[menu_counter])
+        display.show(menu_items[menu_counter], delay=200)
     if button_b.was_pressed() and menu_counter == 0:
-        display.show(Image.CLOCK12)
+        display.show(radio_send, delay=100)
         radio.send('send')
     if button_b.was_pressed() and menu_counter == 1:
-        display.show(Image.CLOCK12)
-        for i in range(0, 5):
-            radio.send('send')
-    if button_b.was_pressed() and menu_counter == 2:
-        display.show(Image.CLOCK12)
+        display.set_pixel(2, 2, 9)
+        sleep(20)
         temp = temperature()
         display.scroll(str(temp) + 'C')
     incoming = radio.receive()
