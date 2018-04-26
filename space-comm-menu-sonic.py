@@ -71,65 +71,65 @@ sonic_menu3 = Image("00000:"
 sonic_menu = [sonic_menu1, sonic_menu2, sonic_menu3]
 
 scanning1 = Image("90000:"
+                    "00000:"
                     "90000:"
-                    "90000:"
-                    "90000:"
+                    "00000:"
                     "90000:")
 scanning2 = Image("79000:"
+                    "00000:"
                     "79000:"
-                    "79000:"
-                    "79000:"
+                    "00000:"
                     "79000:")
 scanning3 = Image("57900:"
+                    "00000:"
                     "57900:"
-                    "57900:"
-                    "57900:"
+                    "00000:"
                     "57900:")
 scanning4 = Image("45790:"
+                    "00000:"
                     "05790:"
-                    "05790:"
-                    "45790:"
+                    "00000:"
                     "05790:")
 scanning5 = Image("04579:"
-                    "00579:"
+                    "00000:"
                     "04579:"
-                    "00579:"
+                    "00000:"
                     "04579:")
 scanning6 = Image("00479:"
-                    "00479:"
+                    "00009:"
                     "00079:"
-                    "00479:"
+                    "00009:"
                     "00479:")
 scanning7 = Image("00000:"
                     "00000:"
                     "00000:"
                     "00000:"
                     "00000:")
-scanning8 = Image("00097:"
+scanning8 = Image("00000:"
                     "00097:"
+                    "00000:"
                     "00097:"
-                    "00097:"
-                    "00097:")
-scanning9 = Image("00975:"
+                    "00000:")
+scanning9 = Image("00000:"
                     "00975:"
+                    "00000:"
                     "00975:"
-                    "00975:"
-                    "00975:")
-scanning10 = Image("09754:"
+                    "00000:")
+scanning10 = Image("00000:"
                     "09750:"
-                    "09754:"
+                    "00000:"
                     "09750:"
-                    "09754:")
-scanning11 = Image("97500:"
+                    "00000:")
+scanning11 = Image("00000:"
                     "97540:"
+                    "00000:"
                     "97540:"
-                    "97540:"
-                    "97500:")
-scanning12 = Image("95400:"
+                    "00000:")
+scanning12 = Image("90000:"
                     "95400:"
-                    "95000:"
+                    "90000:"
                     "95400:"
-                    "95400:")
+                    "90000:")
 
 scanning_cycle1 = [scanning1, scanning2, scanning3, scanning4, scanning5, scanning6]
 scanning_cycle2 = [scanning7, scanning8, scanning9, scanning10, scanning11, scanning12]
@@ -171,11 +171,10 @@ while True:
         y = accelerometer.get_y()
         if y < 0:
             y = y * -1
-        music.pitch(x, 20)
-        music.pitch(200, 15)
+        music.pitch(x, 15)
+        music.pitch(y, 15)
         display.show(scanning_cycle1, delay=100)
-        music.pitch(y, 20)
-        music.pitch(500, 15)
+        music.pitch(200, 30)
         display.show(scanning_cycle2, delay=100)
         display.clear()
 
