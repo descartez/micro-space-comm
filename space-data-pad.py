@@ -69,6 +69,6 @@ flash = [Image().invert()*(i/9) for i in range(9, -1, -1)]
 while True:
     if button_a.was_pressed():
         for i in range(0,5,1):
-            display.show(scanning_cycle1, delay=50)
+            display.show(scanning_cycle1, delay=100)
             display.show(scanning_cycle2, delay=50)
             display.clear()
